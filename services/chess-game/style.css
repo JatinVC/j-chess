@@ -8,6 +8,22 @@
 .square {
     height: 5em;
     width: 5em;
+    position: relative;
+}
+
+.square svg {
+    position: relative;
+    z-index: -10;
+}
+
+path {
+    position: relative;
+    z-index: -11;
+}
+
+.piece {
+    position: relative;
+    z-index: 10;
 }
 
 .beige {

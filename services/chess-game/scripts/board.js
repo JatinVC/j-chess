@@ -4,7 +4,7 @@ import {
     bishop,
     queen,
     king,
-    pawn} from "./pieces.js";
+    pawn} from "./pieces_images.js";
 
 const chess_board = document.getElementById('chess-board');
 
@@ -21,12 +21,14 @@ const initialBoard = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
 ]
 
-const create_board = () => {
+const createBoard = () => {
     initialBoard.forEach((piece, i) => {
         let square = document.createElement('div');
         square.classList.add('square');
         square.setAttribute('square-id', i);
         square.innerHTML = piece;
+
+        square.firstChild?.setAttribute('draggable', true);
 
         const row = Math.floor((63 - i) / 8) + 1
 
@@ -48,6 +50,6 @@ const create_board = () => {
     })
 }
 
-create_board();
+createBoard();
 
 export {chess_board}
