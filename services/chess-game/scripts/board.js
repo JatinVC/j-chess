@@ -10,8 +10,6 @@ const chess_board = document.getElementById('chess-board');
 
 // need to make an 8x8 chessboard with alternating colours
 
-const width = 8;
-
 const initialBoard = [
     rook, knight, bishop, queen, king, bishop, knight, rook,
     pawn, pawn, pawn, pawn, pawn, pawn, pawn, pawn,
@@ -36,7 +34,14 @@ const create_board = () => {
             square.classList.add(i%2===0 ? 'beige' : 'brown');
         }else{
             square.classList.add(i%2===0 ? 'brown' : 'beige');
+        }
 
+        if (i <= 15) {
+            square.firstChild.firstChild.classList.add('black');
+        }
+
+        if(i > 47) {
+            square.firstChild.firstChild.classList.add('white');
         }
 
         chess_board.appendChild(square);
