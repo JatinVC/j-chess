@@ -1,6 +1,10 @@
 # J Chess
 ## Basic chess game by JatinVC
 
+### To run the project:
+Navigate into the repository folder, from the top level run:
+- docker compose -f docker-compose.dev.yml up --build -d
+
 got bored, fun little project
 Goals:
 - create a multiplayer chess game where people can play against each other
@@ -9,3 +13,4 @@ Goals:
 - Back-end to start a new game and matchmaking (or just create a room and allow one other person to join the room, whatever)
 - socket server for the game itself
 - Use docker compose to network between services (also just easier to deploy lol)
+
