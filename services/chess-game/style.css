@@ -1,0 +1,19 @@
+#chess-board{
+    width: 40em;
+    height: 40em;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.square {
+    height: 5em;
+    width: 5em;
+}
+
+.beige {
+    background-color: #FFD5AC;
+}
+
+.brown {
+    background-color: #8a4f20;
+}
