@@ -1,11 +1,3 @@
-import {
-    rook,
-    knight,
-    bishop,
-    queen,
-    king,
-    pawn} from "./pieces_images.js";
-
 import {Pawn} from "./pieces/pawn.js";
 import {Knight} from "./pieces/knight.js";
 import {Bishop} from "./pieces/bishop.js";
