@@ -65,11 +65,11 @@ allSquares.forEach((square) => {
 })
 
 const nextTurn = () => {
-    if(whichPlayer === 'white') {
-        whichPlayer = 'black';
+    if(whichPlayer === WHITE) {
+        whichPlayer = BLACK;
     }else{
         turnNumber++;
-        whichPlayer = 'white';
+        whichPlayer = WHITE;
     }
 }
 
@@ -95,12 +95,12 @@ const checkIfValidMove = (targetSquare) => {
     if(isValidMove){
 
         //if its white turn then revert turn  before changing board ids
-        if(whichPlayer === 'white'){
+        if(whichPlayer === WHITE){
             revertBoard();
         }
         initialBoard[targetPositionId] = initialBoard[startPositionId];
         initialBoard[startPositionId] = '';
-        if(whichPlayer === 'white'){
+        if(whichPlayer === WHITE){
             reverseBoard();
         }
     }
