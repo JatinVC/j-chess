@@ -1,3 +1,5 @@
+import {initialBoard} from "./board.js";
+
 // make all pieces draggable
 // event handlers
 let draggedPiece;
@@ -55,11 +57,9 @@ allSquares.forEach((square) => {
 const nextTurn = () => {
     if(whichPlayer === 'white') {
         whichPlayer = 'black';
-        revertBoard();
     }else{
         turnNumber++;
         whichPlayer = 'white';
-        reverseBoard();
     }
 }
 
@@ -68,8 +68,6 @@ const reverseBoard = () => {
     allSquares.forEach((square, id) =>
         square.setAttribute('square-id', (width * width - 1) - id))
 }
-
-reverseBoard();
 
 const revertBoard = () => {
     const allSquares = document.querySelectorAll('.square');
@@ -81,24 +79,23 @@ const checkIfValidMove = (targetSquare) => {
     const targetPositionId = Number(targetSquare.getAttribute('square-id'))
         || Number(targetSquare.parentNode.getAttribute('square-id'));
 
-    const piece = draggedPiece.id;
-
     const startPositionId = Number(draggedPiece.parentNode.getAttribute('square-id'));
 
-    console.log(`Piece: ${piece}`);
-    console.log(`Started at ${startPositionId}`);
-    console.log(`Dropped at ${targetPositionId}`);
+    let isValidMove = initialBoard[startPositionId].isValidMove(startPositionId, targetPositionId);
+    if(isValidMove){
 
-    switch(piece){
-        case 'pawn':
-            const startRow = [8,9,10,11,12,13,14,15];
-            if(startRow.includes(startPositionId) && startPositionId + (width * 2) === targetPositionId
-                || startPositionId + width === targetPositionId
-                || startPositionId + width - 1 === targetPositionId && document.querySelector(`[square-id="${startPositionId + width - 1}"]`).firstChild
-                || startPositionId + width + 1 === targetPositionId && document.querySelector(`[square-id="${startPositionId + width + 1}"]`).firstChild){
-                return true;
-            }
+        //if its white turn then revert turn  before changing board ids
+        if(whichPlayer === 'white'){
+            revertBoard();
+        }
+        initialBoard[targetPositionId] = initialBoard[startPositionId];
+        initialBoard[startPositionId] = '';
+        if(whichPlayer === 'white'){
+            reverseBoard();
+        }
     }
-}
 
+    return isValidMove;
+
+}
 export {reverseBoard};
