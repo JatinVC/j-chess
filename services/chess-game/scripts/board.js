@@ -7,8 +7,7 @@ import {King} from "./pieces/king.js";
 
 const chess_board = document.getElementById('chess-board');
 
-// need to make an 8x8 chessboard with alternating colours
-
+// Initial board setup.
 const initialBoard = [
     new Rook('Rook', 'black'), new Knight('Knight', 'black'), new Bishop('Bishop', 'black'), new Queen('Queen', 'black'), new King('King', 'black'), new Bishop('Bishop', 'black'), new Knight('Knight', 'black'), new Rook('Rook', 'black'),
     new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'), new Pawn('Pawn', 'black'),
@@ -20,6 +19,7 @@ const initialBoard = [
     new Rook('Rook', 'white'), new Knight('Knight', 'white'), new Bishop('Bishop', 'white'), new Queen('Queen', 'white'), new King('King', 'white'), new Bishop('Bishop', 'white'), new Knight('Knight', 'white'), new Rook('Rook', 'white'),
 ]
 
+// Create UI for the board.
 const createBoard = () => {
     initialBoard.forEach((piece, i) => {
         let square = document.createElement('div');
