@@ -2,9 +2,13 @@ import {initialBoard} from "./board.js";
 
 // make all pieces draggable
 // event handlers
+
+const WHITE = 'white';
+const BLACK = 'black';
+
 let draggedPiece;
 let turnNumber = 1;
-let whichPlayer = 'white';
+let whichPlayer = WHITE;
 const width = 8;
 
 const dragStartHandler = (e) => {
@@ -15,33 +19,39 @@ const dragOverHandler = (e) => {
     e.preventDefault();
 }
 
+/**
+ * After user drops the piece on the target square, we need to check if the move is valid.
+ * @param e - event object
+ */
 const dragDropHandler = (e) => {
     e.stopPropagation();
 
     const isCurrentPlayerPiece = draggedPiece.firstChild.classList.contains(whichPlayer);
     const isSquareOccupied = e.target.classList.contains('piece');
-    const whichOpponent = whichPlayer === 'white' ? 'black' : 'white';
-    const isSquareOccupiedByOpponent = e.target.firstChild?.classList.contains(whichOpponent);
-    let valid = checkIfValidMove(e.target);
 
+    // Check if the piece is of the current player
     if (isCurrentPlayerPiece) {
-       // must check this first
-       if (isSquareOccupiedByOpponent && valid) {
-           e.target.parentNode.appendChild(draggedPiece);
-           e.target.remove();
-           nextTurn();
-           return;
-       }
+        const whichOpponent = whichPlayer === WHITE ? BLACK : WHITE;
+        const isSquareOccupiedByOpponent = e.target.firstChild?.classList.contains(whichOpponent);
+        let valid = checkIfValidMove(e.target);
 
-       // then check if square is occupied
+        // If square is occupied by opponent, and move is valid, then remove the opponent piece and append the dragged piece
+        if (isSquareOccupiedByOpponent && valid) {
+            e.target.remove();
+            e.target.parentNode.appendChild(draggedPiece);
+            nextTurn();
+            return;
+        }
+
+        // then check if square is occupied by current player piece
         if(isSquareOccupied && !isSquareOccupiedByOpponent){
             return;
         }
 
+        // if square is not occupied by any piece, then append the dragged piece
         if(valid){
             e.target.append(draggedPiece);
             nextTurn();
-            return;
         }
     }
 }
